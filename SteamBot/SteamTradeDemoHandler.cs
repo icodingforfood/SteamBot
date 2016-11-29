@@ -2,6 +2,7 @@ using SteamKit2;
 using System.Collections.Generic;
 using SteamTrade;
 using SteamTrade.TradeOffer;
+using System;
 
 namespace SteamBot
 {
@@ -30,7 +31,14 @@ namespace SteamBot
             return true;
         }
 
-        public override void OnLoginCompleted() {}
+        public override void OnLoginCompleted()
+        {
+            Console.WriteLine("login completed!");
+
+            //SteamID other = new SteamID(76561198343021044);
+            //this.Bot.SteamFriends.AddFriend("");
+            //this.Bot.SteamFriends.AddFriend(other);
+        }
 
         public override void OnChatRoomMessage(SteamID chatID, SteamID sender, string message)
         {
@@ -42,7 +50,14 @@ namespace SteamBot
         
         public override void OnMessage (string message, EChatEntryType type) 
         {
+            Console.WriteLine("message:" + message + "type:" + type);
             SendChatMessage(Bot.ChatResponse);
+
+
+            if (message == "test")
+            {
+                OnTradeInit();
+            }
         }
 
         public override bool OnTradeRequest() 
@@ -79,10 +94,10 @@ namespace SteamBot
              ************************************************************************************/
 
             contextId.Add(1);
-            contextId.Add(6);
+            //contextId.Add(6);
 
-            mySteamInventory.load(753, contextId, Bot.SteamClient.SteamID);
-            OtherSteamInventory.load(753, contextId, OtherSID);
+            mySteamInventory.load(322330, contextId, Bot.SteamClient.SteamID);
+            OtherSteamInventory.load(570, contextId, OtherSID);
 
             if (!mySteamInventory.isLoaded | !OtherSteamInventory.isLoaded)
             {

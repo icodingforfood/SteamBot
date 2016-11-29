@@ -94,7 +94,7 @@ namespace SteamBot
             switch (offer.OfferState)
             {
                 case TradeOfferState.TradeOfferStateAccepted:
-                    Log.Info($"Trade offer {offer.TradeOfferId} has been completed!");
+                    Log.Info("Trade offer {offer.TradeOfferId} has been completed!");
                     SendChatMessage("Trade completed, thank you!");
                     break;
                 case TradeOfferState.TradeOfferStateActive:
@@ -103,10 +103,10 @@ namespace SteamBot
                     //Trade is still active but incomplete
                     break;
                 case TradeOfferState.TradeOfferStateCountered:
-                    Log.Info($"Trade offer {offer.TradeOfferId} was countered");
+                    Log.Info("Trade offer {offer.TradeOfferId} was countered");
                     break;
                 default:
-                    Log.Info($"Trade offer {offer.TradeOfferId} failed");
+                    Log.Info("Trade offer {offer.TradeOfferId} failed");
                     break;
             }
         }

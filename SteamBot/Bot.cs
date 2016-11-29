@@ -777,7 +777,8 @@ namespace SteamBot
             var authFile = Path.Combine("authfiles", String.Format("{0}.auth", logOnDetails.Username));
             if (File.Exists(authFile))
             {
-                SteamGuardAccount = Newtonsoft.Json.JsonConvert.DeserializeObject<SteamAuth.SteamGuardAccount>(File.ReadAllText(authFile));
+                var test = File.ReadAllText(authFile);
+                SteamGuardAccount = Newtonsoft.Json.JsonConvert.DeserializeObject<SteamAuth.SteamGuardAccount>(test);
                 return SteamGuardAccount.GenerateSteamGuardCode();
             }
             return string.Empty;
@@ -1089,7 +1090,7 @@ namespace SteamBot
                     {
                         if (SteamGuardAccount.AcceptConfirmation(confirmation))
                         {
-                            Log.Success("Confirmed {0}. (Confirmation ID #{1})", confirmation.ConfirmationDescription, confirmation.ConfirmationID);
+                            Log.Success("Confirmed {0}. (Confirmation ID #{1})", confirmation.Description, confirmation.ID);
                         }
                     }
                 }

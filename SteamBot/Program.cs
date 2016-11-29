@@ -27,7 +27,7 @@ namespace SteamBot
 
             if (showHelp)
             {
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("If no options are given SteamBot defaults to Bot Manager mode.");
                 opts.WriteOptionDescriptions(Console.Out);
                 Console.Write("Press Enter to exit...");
@@ -35,14 +35,17 @@ namespace SteamBot
                 return;
             }
 
-            if (args.Length == 0)
-            {
-                BotManagerMode();
-            }
-            else if (botIndex > -1)
-            {
-                BotMode(botIndex);
-            }
+            //if (args.Length == 0)
+            //{
+            //    BotManagerMode();
+            //}
+            //else if (botIndex > -1)
+            //{
+            //    BotMode(botIndex);
+            //}
+            BotMode(0);
+
+            //BotManagerMode();
         }
 
         #region SteamBot Operational Modes
@@ -77,6 +80,9 @@ namespace SteamBot
             Bot b = new Bot(configObject.Bots[botIndex], configObject.ApiKey, BotManager.UserHandlerCreator, true, true);
             Console.Title = "Bot Manager";
             b.StartBot();
+
+
+            //b.SteamFriends.AddFriend("[机器人]按聊天提示取货");
 
             string AuthSet = "auth";
             string ExecCommand = "exec";

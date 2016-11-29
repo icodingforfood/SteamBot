@@ -196,6 +196,8 @@ namespace SteamTrade
                                     app_data = tmpAppData
                                 }
                             );
+
+                            Console.WriteLine("-- name --"+class_instance.name + "-- type --" + "-- marketable --" + (bool)class_instance.marketable+ "-- tradable --" + (bool)class_instance.tradable+ "-- classid --"+ long.Parse((string)class_instance.classid));
                             break;
                         }
                     }

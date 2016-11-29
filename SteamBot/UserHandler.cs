@@ -27,7 +27,7 @@ namespace SteamBot
         {
             get
             {
-                if(Bot == null || Bot.SteamWeb == null)
+                if (Bot == null || Bot.SteamWeb == null)
                 {
                     throw new InvalidOperationException("You cannot use 'SteamWeb' before the Bot has been initialized!");
                 }
@@ -35,7 +35,7 @@ namespace SteamBot
             }
         }
 
-        public UserHandler (Bot bot, SteamID sid)
+        public UserHandler(Bot bot, SteamID sid)
         {
             Bot = bot;
             OtherSID = sid;
@@ -44,7 +44,7 @@ namespace SteamBot
 
         private bool HandleWaitingOnUserResponse(string message)
         {
-            if(_waitingOnUserResponse == null)
+            if (_waitingOnUserResponse == null)
                 return false;
 
             _waitingOnUserResponse.SetResult(message);
@@ -69,7 +69,7 @@ namespace SteamBot
         /// </example>
         public void GetOtherInventory()
         {
-            otherInventoryTask = Task.Factory.StartNew(() =>Inventory.FetchInventory(OtherSID, Bot.ApiKey, SteamWeb));
+            otherInventoryTask = Task.Factory.StartNew(() => Inventory.FetchInventory(OtherSID, Bot.ApiKey, SteamWeb));
         }
 
         public Inventory OtherInventory
@@ -91,10 +91,10 @@ namespace SteamBot
         {
             get
             {
-                return Bot.CurrentTrade; 
+                return Bot.CurrentTrade;
             }
         }
-        
+
         /// <summary>
         /// Gets the log the bot uses for convenience.
         /// </summary>
@@ -102,7 +102,7 @@ namespace SteamBot
         {
             get { return Bot.Log; }
         }
-        
+
         /// <summary>
         /// Gets a value indicating whether the other user is admin.
         /// </summary>
@@ -128,23 +128,23 @@ namespace SteamBot
         /// <returns>
         /// Whether to accept.
         /// </returns>
-        public abstract bool OnFriendAdd ();
+        public abstract bool OnFriendAdd();
 
         /// <summary>
         /// Called when the user removes the bot as a friend.
         /// </summary>
-        public abstract void OnFriendRemove ();
+        public abstract void OnFriendRemove();
 
         /// <summary>
         /// Called whenever a message is sent to the bot.
         /// This is limited to regular and emote messages.
         /// </summary>
-        public abstract void OnMessage (string message, EChatEntryType type);
+        public abstract void OnMessage(string message, EChatEntryType type);
 
         public void OnMessageHandler(string message, EChatEntryType type)
         {
             _lastMessageWasFromTrade = false;
-            if(!HandleWaitingOnUserResponse(message))
+            if (!HandleWaitingOnUserResponse(message))
             {
                 OnMessage(message, type);
             }
@@ -154,14 +154,14 @@ namespace SteamBot
         /// Called when the bot is fully logged in.
         /// </summary>
         public abstract void OnLoginCompleted();
-       
+
         /// <summary>
         /// Called whenever a user requests a trade.
         /// </summary>
         /// <returns>
         /// Whether to accept the request.
         /// </returns>
-        public abstract bool OnTradeRequest ();
+        public abstract bool OnTradeRequest();
 
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace SteamBot
         /// <param name="message">The message sent</param>
         public virtual void OnChatRoomMessage(SteamID chatID, SteamID sender, string message)
         {
-
+            Console.Write("chat-->" + "steam id:" + chatID + "steam id sender:" + sender + "message:" + message);
         }
 
         /// <summary>
@@ -225,7 +225,7 @@ namespace SteamBot
         #region Trade events
         // see the various events in SteamTrade.Trade for descriptions of these handlers.
 
-        public abstract void OnTradeError (string error);
+        public abstract void OnTradeError(string error);
 
         public virtual void OnStatusError(Trade.TradeStatusType status)
         {
@@ -235,7 +235,7 @@ namespace SteamBot
             OnTradeError(errorMessage);
         }
 
-        public abstract void OnTradeTimeout ();
+        public abstract void OnTradeTimeout();
 
         public void _OnTradeAwaitingConfirmation(long tradeOfferID)
         {
@@ -244,16 +244,16 @@ namespace SteamBot
         }
         public abstract void OnTradeAwaitingConfirmation(long tradeOfferID);
 
-        public virtual void OnTradeClose ()
+        public virtual void OnTradeClose()
         {
-            Bot.CloseTrade ();
+            Bot.CloseTrade();
         }
 
-        public abstract void OnTradeInit ();
+        public abstract void OnTradeInit();
 
-        public abstract void OnTradeAddItem (Schema.Item schemaItem, Inventory.Item inventoryItem);
+        public abstract void OnTradeAddItem(Schema.Item schemaItem, Inventory.Item inventoryItem);
 
-        public abstract void OnTradeRemoveItem (Schema.Item schemaItem, Inventory.Item inventoryItem);
+        public abstract void OnTradeRemoveItem(Schema.Item schemaItem, Inventory.Item inventoryItem);
 
         public void OnTradeMessageHandler(string message)
         {
@@ -264,7 +264,7 @@ namespace SteamBot
             }
         }
 
-        public abstract void OnTradeMessage (string message);
+        public abstract void OnTradeMessage(string message);
 
         public void OnTradeReadyHandler(bool ready)
         {
@@ -272,7 +272,7 @@ namespace SteamBot
             OnTradeReady(ready);
         }
 
-        public abstract void OnTradeReady (bool ready);
+        public abstract void OnTradeReady(bool ready);
 
         public void OnTradeAcceptHandler()
         {
@@ -293,7 +293,7 @@ namespace SteamBot
         {
             try
             {
-                if(timer != null)
+                if (timer != null)
                 {
                     timer.Dispose();
                 }
